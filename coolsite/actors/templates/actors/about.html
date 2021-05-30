@@ -1,0 +1,14 @@
+{% extends 'actors/base.html' %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+
+<div>
+    <p>
+        Сайт сделан просто так от скуки. Просто для практики если че.
+    </p>
+    <p>
+        Обратная связь: <a href="{% url 'contact' %}">Оставить сообщение</a>
+    </p>
+</div>
+{% endblock %}
