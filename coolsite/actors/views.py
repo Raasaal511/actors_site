@@ -55,11 +55,7 @@ class ContactFormView(DataMixin, FormView):
         return context_items
 
     def form_valid(self, form):
-        print(form.cleaned_data)
-
         return redirect('home')
-
-
 
 
 class ShowPost(DataMixin, DeleteView):
@@ -67,6 +63,7 @@ class ShowPost(DataMixin, DeleteView):
     template_name = 'actors/post.html'
     slug_url_kwarg = 'post_slug'
     context_object_name = 'post'
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context(title=context['post'])
@@ -79,13 +76,13 @@ class ActorCategory(DataMixin, ListView):
     model = Actor
     template_name = 'actors/index.html'
     context_object_name = 'posts'
+    
     def get_queryset(self):
         return Actor.objects.filter(category__slug=self.kwargs['category_slug'],
                                     is_published=True).select_related('category')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-
         cat = Category.objects.get(slug=self.kwargs['category_slug'])
         c_def = self.get_user_context(title='Категория - ' + str(cat.name),
                                       category_selected=cat.id)
@@ -98,6 +95,7 @@ class RegisterUser(DataMixin, CreateView):
     form_class = RegisterUserForm
     template_name = 'actors/register.html'
     success_url = reverse_lazy('login')
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context(title='Регистрация')
