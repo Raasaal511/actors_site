@@ -22,9 +22,6 @@
     cd venv/scripts
     activate
 
-#### 4) Устанавливить зависимости:
-    pip install -r requirements.txt
-
 #### 4) Сделайте миграцию:
     python manage.py makemigrations
     python manage.py migrate
